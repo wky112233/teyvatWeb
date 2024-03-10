@@ -28,6 +28,28 @@ body {
 
 @layer utilities {
   .text-balance {
-    text-wrap: balance;
+    text-wrap: normal;
   }
+}
+
+@layer base {
+  canvas#starfield {
+    @apply fixed top-0 left-0 w-full h-full;
+  }
+}
+::-webkit-scrollbar {
+  background-color: rgba(27,27,27,.4);
+  border-radius: 10px;
+  width: 3px;
+  height:3px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(210, 190, 147,.8);
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #2b2d30;
 }
