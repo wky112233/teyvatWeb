@@ -5,21 +5,20 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
-import Link from "next/link";
 import CardActions from '@mui/material/CardActions';
 import CharacterContent from "@/app/ui/character/characterContent";
 
 const bull = (
     <Box
         component="span"
-        sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+        sx={{display: 'inline-block', mx: '2px', transform: 'scale(0.8)'}}
     >
         •
     </Box>
 );
 
 
-export default function CharacterCard ({name, position}: BookProps) {
+export default function CharacterCard(props: CharacterCardProps) {
     const [drawerOpen, setDrawerOpen] = React.useState(false);
 
     const toggleDrawer = (open: boolean) => {
@@ -27,33 +26,24 @@ export default function CharacterCard ({name, position}: BookProps) {
     };
 
     return (
-        <Card className={"bg-gray-900 text-amber-50 border border-gray-500 mx-4 my-2 hover:outline outline-slate-300"} >
+        <Card sx={{
+            backgroundColor: 'transparent'
+        }} className={"bg-gray-900 text-amber-50 border border-gray-500 mx-4 my-2 hover:outline outline-slate-300"}>
+            <CharacterContent open={drawerOpen} toggleDrawer={toggleDrawer}></CharacterContent>
             <CardActions onClick={() => toggleDrawer(true)} className={"flex-col justify-start"}>
                 <CardMedia
                     component="img"
-                    sx={{ width: 128 }}
-                    image={position}
+                    sx={{width: 128}}
+                    image={props.location}
                     alt="Live"
                     className={"mx-2 rounded-md bg-[#995f2c]"}
                 />
                 <CardContent className={"h-[24px]"}>
-                    {/*<div className={"w-[100px]"}>*/}
-                    {/*    <Image src={"/time_trekker.webp"} alt={"Time Trekker"} width={64} height={64}></Image>*/}
-                    {/*</div>*/}
-                    <div >
-                        <Typography variant="body2">
-                            {name}
-                        </Typography>
-                    </div>
-                    {/*<Typography variant="body2">*/}
-                    {/*    well meaning and kindly. well meaning and kindly.*/}
-                    {/*</Typography>*/}
+                    <h5 className={"h-full w-full text-xl -ml-2"}>
+                        {props.Name}
+                    </h5>
                 </CardContent>
-                {/*<CardActions>*/}
-                {/*    <Button size="small">More</Button>*/}
-                {/*</CardActions>*/}
             </CardActions>
-            <CharacterContent open={drawerOpen} toggleDrawer={toggleDrawer}></CharacterContent>
         </Card>
     );
 }

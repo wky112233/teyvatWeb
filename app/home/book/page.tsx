@@ -6,69 +6,69 @@ import Link from "next/link";
 
 
 export default function Page() {
-    const books: BookProps[] = [
+    const books: CharacterCardProps[] = [
         {
-            name: 'Time Trekker',
-            position: "/time_trekker.webp"
+            Name: 'Time Trekker',
+            location: "/time_trekker.webp"
         },
         {
-            name: 'Time Trekker',
-            position: "/time_trekker.webp"
+            Name: 'Time Trekker',
+            location: "/time_trekker.webp"
         },
         {
-            name: 'Time Trekker',
-            position: "/time_trekker.webp"
+            Name: 'Time Trekker',
+            location: "/time_trekker.webp"
         },
         {
-            name: 'Time Trekker',
-            position: "/time_trekker.webp"
+            Name: 'Time Trekker',
+            location: "/time_trekker.webp"
         },
         {
-            name: 'Time Trekker',
-            position: "/time_trekker.webp"
+            Name: 'Time Trekker',
+            location: "/time_trekker.webp"
         },
         {
-            name: 'Time Trekker',
-            position: "/time_trekker.webp"
+            Name: 'Time Trekker',
+            location: "/time_trekker.webp"
         },
         {
-            name: 'Time Trekker',
-            position: "/time_trekker.webp"
+            Name: 'Time Trekker',
+            location: "/time_trekker.webp"
         },
         {
-            name: 'Time Trekker',
-            position: "/time_trekker.webp"
+            Name: 'Time Trekker',
+            location: "/time_trekker.webp"
         },
         {
-            name: 'Time Trekker',
-            position: "/time_trekker.webp"
+            Name: 'Time Trekker',
+            location: "/time_trekker.webp"
         },
         {
-            name: 'Time Trekker',
-            position: "/time_trekker.webp"
+            Name: 'Time Trekker',
+            location: "/time_trekker.webp"
         },
         {
-            name: 'Time Trekker',
-            position: "/time_trekker.webp"
+            Name: 'Time Trekker',
+            location: "/time_trekker.webp"
         },
         {
-            name: 'Time Trekker',
-            position: "/time_trekker.webp"
+            Name: 'Time Trekker',
+            location: "/time_trekker.webp"
         },
         {
-            name: 'Time Trekker',
-            position: "/time_trekker.webp"
+            Name: 'Time Trekker',
+            location: "/time_trekker.webp"
         },
     ];
     return (
         <div>
-            <Typography variant="h5" className={"text-amber-100 mx-2"}>
+            <h5 className={"font-serif text-3xl text-amber-100 mx-2"}>
                 Library
-            </Typography>
+            </h5>
             <Divider className={"bg-gray-500 my-2"}></Divider>
             <div className={"flex flex-wrap overflow-y-auto"}>
                 {books.map((book, index) => (
-                    <BookCard key={index} name={book.name} position={book.position}/>
+                    <BookCard key={index} Name={book.Name} location={book.location}/>
                 ))}
             </div>
         </div>

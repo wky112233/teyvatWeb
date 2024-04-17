@@ -22,10 +22,12 @@ const Transition = React.forwardRef(function Transition(
 });
 interface BookContentProps {
     open: boolean;
+    name: string;
+    position: string;
     toggleDrawer: (open: boolean) => void;
 }
 
-export default function BookContent({ open, toggleDrawer }:BookContentProps) {
+export default function BookContent({ open, name, position, toggleDrawer }:BookContentProps) {
 
     return (
         <React.Fragment >
@@ -35,18 +37,17 @@ export default function BookContent({ open, toggleDrawer }:BookContentProps) {
                 onClose={() => toggleDrawer(false)}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
-                className={"overflow-y-auto bg-gray-900 px-10"}
+                className={"overflow-y-auto bg-gray-900 px-20"}
             >
                 <DialogTitle id="alert-dialog-title" className ="bg-gray-900 text-amber-100">
-                    {"Time Trekker"}
+                    {name}
                 </DialogTitle>
                 <DialogContent className={"bg-gray-900 text-amber-100 px-44"}>
                     <div className={"flex py-12"}>
-                        <Image src={"/time_trekker.webp"} alt={"time_trekker"} className={"rounded-md bg-gradient-to-tr from-gray-700 to-gray-500"} width={128} height={128}></Image>
+                        <Image src={position} alt={position} className={"rounded-md bg-gradient-to-tr from-gray-700 to-gray-500"} width={128} height={128}></Image>
                         <div className={"flex-col px-5"}>
                             <Typography variant={"h4"}>
-                                {/*name*/}
-                                Time Trekker
+                                {name}
                             </Typography>
                             <Typography variant={"body2"}>
                                 {/*description*/}

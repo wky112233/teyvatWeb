@@ -5,7 +5,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
-import Link from "next/link";
 import CardActions from '@mui/material/CardActions';
 import BookContent from "@/app/ui/book/bookContent";
 
@@ -19,7 +18,7 @@ const bull = (
 );
 
 
-export default function BookCard ({name, position}: BookProps) {
+export default function BookCard ({Name, location}: CharacterCardProps) {
     const [drawerOpen, setDrawerOpen] = React.useState(false);
 
     const toggleDrawer = (open: boolean) => {
@@ -32,7 +31,7 @@ export default function BookCard ({name, position}: BookProps) {
                     <CardMedia
                         component="img"
                         sx={{ width: 64 }}
-                        image={position}
+                        image={location}
                         alt="Live"
                         className={"mx-2 rounded-md bg-gradient-to-r from-gray-700 to-gray-500"}
                     />
@@ -42,7 +41,7 @@ export default function BookCard ({name, position}: BookProps) {
                         {/*</div>*/}
                         <div className={"flex-1 flex-col"}>
                             <Typography variant="body2">
-                                {name}
+                                {Name}
                             </Typography>
                         </div>
                         {/*<Typography variant="body2">*/}
@@ -53,7 +52,7 @@ export default function BookCard ({name, position}: BookProps) {
                     {/*    <Button size="small">More</Button>*/}
                     {/*</CardActions>*/}
                 </CardActions>
-                <BookContent open={drawerOpen} toggleDrawer={toggleDrawer}></BookContent>
+                <BookContent open={drawerOpen} name={Name} position={location} toggleDrawer={toggleDrawer}></BookContent>
             </Card>
     );
 }
