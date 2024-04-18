@@ -22,7 +22,7 @@ export const getAffiliations = () => service.get("affiliations");
 
 export const getFoods = () => service.get("foods");
 
-export const getNation = () => service.get("nation");
+// export const getNation = () => service.get("nation");
 
 export const getLivingBeings = () => service.get("livingBeing");
 

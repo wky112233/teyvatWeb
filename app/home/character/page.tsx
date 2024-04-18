@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import Divider from "@mui/material/Divider";
 import CharacterCard from "@/app/ui/character/characterCard";
 import CheckBoxSelect from "@/app/ui/checkBoxSelect";
@@ -16,7 +16,7 @@ export default function Page() {
   const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([]);
 
   // 获取角色数据
-  const fetchCharacters = async () => {
+  const fetchCharacters = useCallback(async () => {
     setLoading(true);
     getAllCharacters()
       .then((response) => {
@@ -27,16 +27,18 @@ export default function Page() {
         setAffiliations(response.data);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         showMessage("Failed to fetch characters or affiliations", "error");
         setLoading(false);
       });
-  };
+  }, [showMessage]);
 
   // 当选中区域改变时，重新获取数据
   useEffect(() => {
-    fetchCharacters();
-  }, []);
+    fetchCharacters().catch(() => {
+      showMessage("Failed to fetch data:", "error");
+    });
+  }, [fetchCharacters, showMessage]);
 
   const handleRegionChange = (regions: string[]) => {
     console.log("handleRegionChange:", regions); // 显示设置前的值

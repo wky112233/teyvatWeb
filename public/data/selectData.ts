@@ -1,7 +1,7 @@
 export const Regions = [
     'Mondstadt',
-    'Liyue Harbor',
-    'Inazuma City',
+    'Liyue',
+    'Inazuma',
     'Snezhnaya',
     'Sumeru',
     'Fontaine',

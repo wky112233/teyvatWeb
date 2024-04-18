@@ -6,8 +6,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
-import Slide from "@mui/material/Slide";
-import { TransitionProps } from "@mui/material/transitions";
 import Image from "next/image";
 import Divider from "@mui/material/Divider";
 import {
@@ -16,19 +14,8 @@ import {
     TableBody,
     TableCell,
     TableContainer,
-    TableHead,
     TableRow,
 } from "@mui/material";
-import { lusitana } from "@/app/ui/fonts";
-
-const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & {
-        children: React.ReactElement;
-    },
-    ref: React.Ref<unknown>,
-) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
 
 interface MaterialContentProps {
     open: boolean;
