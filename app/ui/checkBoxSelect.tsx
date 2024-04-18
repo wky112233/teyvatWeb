@@ -6,30 +6,32 @@ import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
+import { InputLabel } from "@mui/material";
+import { useEffect } from "react";
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {},
-  },
-};
+interface CheckBoxSelectProps {
+  selectSize: "small" | "medium";
+  items: string[];
+  onSelect: (item: string[]) => void;
+}
 
 export default function CheckBoxSelect({
   selectSize,
   items,
   onSelect,
 }: CheckBoxSelectProps) {
-  const [personName, setPersonName] = React.useState<string[]>([]);
+  const [selectedRegions, setSelectedRegions] = React.useState<string[]>([]);
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+  useEffect(() => {
+    onSelect(selectedRegions); // 调用外部传入的onSelect函数，将选中的区域数组传出
+  }, [selectedRegions]);
+
+  const handleChange = (event: SelectChangeEvent<typeof selectedRegions>) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value,
-    );
+    const selectedValues = typeof value === "string" ? value.split(",") : value;
+    setSelectedRegions(selectedValues);
   };
 
   return (
@@ -52,13 +54,12 @@ export default function CheckBoxSelect({
           },
         }}
       >
+        <InputLabel className={"text-amber-50"}>Nation</InputLabel>
         <Select
-          // labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
           multiple
-          value={personName}
+          value={selectedRegions}
           onChange={handleChange}
-          input={<OutlinedInput />}
+          input={<OutlinedInput label="Tag" />}
           renderValue={(selected) => selected.join(", ")}
           className={"border border-gray-500 bg-transparent text-gray-200 "}
           MenuProps={{
@@ -95,7 +96,7 @@ export default function CheckBoxSelect({
               className={"bg-slate-800 bg-transparent text-amber-50"}
             >
               <Checkbox
-                checked={personName.indexOf(name) > -1}
+                checked={selectedRegions.indexOf(name) > -1}
                 sx={{
                   color: "rgba(255, 255, 255, 0.8)", // 未选中时的颜色
                   "&.Mui-checked": {
@@ -103,7 +104,6 @@ export default function CheckBoxSelect({
                   },
                 }}
               />
-
               <ListItemText primary={name} />
             </MenuItem>
           ))}

@@ -18,14 +18,10 @@ interface Affiliation {
   nation: string;
 }
 
-interface Enemy {
-  name: string;
-  position: string;
-}
-
-interface Wildlife {
-  name: string;
-  position: string;
+interface LivingBeing {
+  living_being_name: string;
+  living_being_description: string;
+  living_being_icon_img: string;
 }
 
 interface Food {
@@ -40,10 +36,4 @@ interface Material {
   material_name: string;
   material_description: string;
   material_icon_img: string;
-}
-
-interface CheckBoxSelectProps {
-  selectSize?: "small" | "medium";
-  items: string[];
-  onSelect?: (item: string) => void;
 }

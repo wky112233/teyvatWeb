@@ -24,6 +24,6 @@ export const getFoods = () => service.get("foods");
 
 export const getNation = () => service.get("nation");
 
-export const getLivingBeings = () => service.get("livingBeings");
+export const getLivingBeings = () => service.get("livingBeing");
 
-export const getMaterials = () => service.get("materials");
+export const getMaterials = () => service.get("material");

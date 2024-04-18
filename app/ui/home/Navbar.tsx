@@ -1,25 +1,56 @@
-"use client";
 import * as React from "react";
-import ListSubheader from "@mui/material/ListSubheader";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
 import Link from "next/link";
 import PhotoCameraFrontOutlinedIcon from "@mui/icons-material/PhotoCameraFrontOutlined";
-import PetsOutlinedIcon from "@mui/icons-material/PetsOutlined";
-import AdbOutlinedIcon from "@mui/icons-material/AdbOutlined";
 import Image from "next/image";
 import { lusitana } from "@/app/ui/fonts";
 export default function NestedList() {
-  const [open, setOpen] = React.useState(true);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
+  const sideList = [
+    {
+      href: "/home/character",
+      icon: <PhotoCameraFrontOutlinedIcon className={"text-amber-100"} />,
+      label: "Characters",
+    },
+    {
+      href: "/home/living",
+      icon: (
+        <Image
+          src={"/slim.png"}
+          alt={"slim.png"}
+          width={25}
+          height={25}
+        ></Image>
+      ),
+      label: "Living Beings",
+    },
+    {
+      href: "/home/material",
+      icon: (
+        <Image
+          src={"/material_icon.png"}
+          alt={"material_icon.png"}
+          width={25}
+          height={25}
+        ></Image>
+      ),
+      label: "Materials",
+    },
+    {
+      href: "/home/food",
+      icon: (
+        <Image
+          src={"/food.png"}
+          alt={"search.png"}
+          width={25}
+          height={25}
+        ></Image>
+      ),
+      label: "Food",
+    },
+  ];
 
   return (
     <div className={"h-full w-[240px] border-l border-r border-gray-500"}>
@@ -31,86 +62,16 @@ export default function NestedList() {
         }}
         component="nav"
         aria-labelledby="nested-list-subheader"
-        subheader={
-          <ListSubheader
-            component="div"
-            id="nested-list-subheader"
-            className={"bg-gray-950 text-base text-amber-100 text-center "}
-          >
-            {/*Contents*/}
-          </ListSubheader>
-        }
         className={`${lusitana.className} h-full bg-gray-900 overflow-y-auto text-amber-50 z-0 font-serif`}
       >
-        <Link href={"/home/character"}>
-          <ListItemButton>
-            <ListItemIcon>
-              <PhotoCameraFrontOutlinedIcon className={"text-amber-100"} />
-            </ListItemIcon>
-            <ListItemText primary="Characters" className={"font-serif"} />
-          </ListItemButton>
-        </Link>
-        <ListItemButton onClick={handleClick}>
-          <ListItemIcon>
-            <Image
-              src={"/slim.png"}
-              alt={"slim.png"}
-              width={25}
-              height={25}
-            ></Image>
-          </ListItemIcon>
-          <ListItemText primary="Living Beings" />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <Link href={"/home/living"}>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <AdbOutlinedIcon className={"text-amber-100"} />
-                </ListItemIcon>
-                <ListItemText primary="Enemies and Monsters" />
-              </ListItemButton>
-            </Link>
-            <Link href={"/home/wildlife"}>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <PetsOutlinedIcon className={"text-amber-100"} />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Wildlife"
-                  className={`${lusitana.className}`}
-                />
-              </ListItemButton>
-            </Link>
-          </List>
-        </Collapse>
-        <Link href={"/home/material"}>
-          <ListItemButton>
-            <ListItemIcon>
-              <Image
-                src={"/material_icon.png"}
-                alt={"search.png"}
-                width={25}
-                height={25}
-              ></Image>
-            </ListItemIcon>
-            <ListItemText primary="Materials" />
-          </ListItemButton>
-        </Link>
-        <Link href={"/home/food"}>
-          <ListItemButton>
-            <ListItemIcon>
-              <Image
-                src={"/food.png"}
-                alt={"search.png"}
-                width={25}
-                height={25}
-              ></Image>
-            </ListItemIcon>
-            <ListItemText primary="Food" />
-          </ListItemButton>
-        </Link>
+        {sideList.map((item) => (
+          <Link href={item.href} key={item.href}>
+            <ListItemButton>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.label} className={"font-serif"} />
+            </ListItemButton>
+          </Link>
+        ))}
       </List>
     </div>
   );
