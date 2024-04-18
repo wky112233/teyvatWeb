@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import {lusitana} from "@/app/ui/fonts";
+import { lusitana } from "@/app/ui/fonts";
+import ParentProvider from "@/contexts/ParentWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lusitana.className}`}>{children}</body>
+      <ParentProvider>
+        <body className={`${lusitana.className}`}>{children}</body>
+      </ParentProvider>
     </html>
   );
 }
