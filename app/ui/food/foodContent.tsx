@@ -1,4 +1,6 @@
+"use client"
 import * as React from "react";
+import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -16,6 +18,8 @@ import {
     TableContainer,
     TableRow,
 } from "@mui/material";
+import {getMaterialsByFoodId} from "@/api/axios";
+import MaterialCard from "@/app/ui/material/materialCard";
 
 interface FoodContentProps {
     open: boolean;
@@ -28,6 +32,23 @@ export default function FoodContent({
                                              toggleDrawer,
                                              food,
                                          }: FoodContentProps) {
+    const [materials, setMaterials] = useState<Material[]>([]);
+    const [loading, setLoading] = useState(false);
+    const fetchMaterials = async () => {
+        setLoading(true);
+        try {
+            const response = await getMaterialsByFoodId(food.food_id);
+            setMaterials(response.data); // 假设响应的数据在data字段中
+            setLoading(false);
+        } catch (error) {
+            console.error("Failed to fetch materials", error);
+            setLoading(false);
+        }
+    };
+    // 当选中区域改变时，重新获取数据
+    useEffect(() => {
+        fetchMaterials();
+    }, []);
     const attributes = [
         {
             label: "Name",
@@ -91,7 +112,7 @@ export default function FoodContent({
                                     component={Paper}
                                     className={"font-serif bg-transparent text-amber-50"}
                                 >
-                                    <Table sx={{ minWidth: 650 }} aria-label="customized table">
+                                    <Table sx={{minWidth: 650}} aria-label="customized table">
                                         <TableBody>
                                             {attributes.map((row, index) => (
                                                 <TableRow key={index}>
@@ -133,6 +154,22 @@ export default function FoodContent({
                                     </Table>
                                 </TableContainer>
                             </div>
+                            {materials.length > 0 && (
+                                <>
+                                    <Typography
+                                        variant={"h5"}
+                                        className={"py-2 px-4 border-b border-b-gray-500 font-serif"}
+                                    >
+                                        Materials
+                                    </Typography>
+                                    <div className={"flex flex-wrap overflow-y-auto"}>
+                                        {materials.map((material: Material, index: number) => (
+                                            <MaterialCard key={index} material={material}/>
+                                        ))}
+                                    </div>
+                                </>
+                            )}
+
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions

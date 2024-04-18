@@ -37,7 +37,7 @@ export default function FoodCard({ food }: FoodCardProps) {
             >
                 <CardMedia
                     component="img"
-                    sx={{ width: 128 }}
+                    sx={{ width: 200, height: 200 }}
                     image={food.food_icon_img}
                     alt="Live"
                     className={"mx-2 rounded-md bg-[#995f2c]"}

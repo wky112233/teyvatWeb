@@ -8,6 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import Divider from "@mui/material/Divider";
+import { useData } from '@/contexts/DataContext';
 import {
   Paper,
   Table,
@@ -16,6 +17,7 @@ import {
   TableContainer,
   TableRow,
 } from "@mui/material";
+import FoodCard from "@/app/ui/food/foodCard";
 
 interface CharacterContentProps {
   open: boolean;
@@ -28,6 +30,9 @@ export default function CharacterContent({
   toggleDrawer,
   character,
 }: CharacterContentProps) {
+  const { foods } = useData();  // 使用useData钩子获取foods数据
+
+  const specialFood = foods.find(food => food.food_id === character.special_food_id);
   const attributes = [
     {
       label: "Name",
@@ -41,6 +46,12 @@ export default function CharacterContent({
       label2: "Title",
       value2: character.title,
     },
+    {
+      label: "Vision",
+      value: character.vision,
+      label2: "Special food",
+      value2: specialFood?.food_icon_img
+    }
   ];
   return (
     <React.Fragment>
@@ -66,8 +77,8 @@ export default function CharacterContent({
               src={character.avatar_img}
               alt={character.character_name}
               className={"rounded-md bg-[#995f2c]"}
-              width={320}
-              height={160}
+              width={480}
+              height={240}
             ></Image>
             <div className={"flex-col px-5"}>
               <h2 className={"text-3xl font-serif"}>
@@ -133,7 +144,15 @@ export default function CharacterContent({
                             "text-amber-50 border-y font-serif border-gray-500"
                           }
                         >
-                          {row.value2}
+                          {row.label2 === "Special food" && row.value2 ? (
+                              specialFood ? (
+                                  <FoodCard food={specialFood} />
+                              ) : (
+                                  <div>Food information not available</div>  // 你可以在这里提供一个合适的占位或错误消息
+                              )
+                          ) : (
+                              row.value2
+                          )}
                         </TableCell>
                       </TableRow>
                     ))}

@@ -7,7 +7,7 @@ import React, {
   ReactNode,
 } from "react";
 import axios from "axios";
-import { getAffiliations, getFoods } from "@/api/axios";
+import {getAffiliations, getFoods, getMaterials} from "@/api/axios";
 
 const service = axios.create({
   baseURL: "https://your.api.url/api/", // 设置你的API基础路径
@@ -16,8 +16,10 @@ const service = axios.create({
 type DataContextType = {
   affiliations: Affiliation[];
   foods: Food[];
+  materials: Material[];
   fetchAffiliations: () => void;
   fetchFoods: () => void;
+  fetchMaterials: () => void;
 };
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -35,8 +37,9 @@ type DataProviderProps = {
 };
 
 export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
-  const [affiliations, setAffiliations] = useState<any[]>([]);
-  const [foods, setFoods] = useState<any[]>([]);
+  const [affiliations, setAffiliations] = useState<Affiliation[]>([]);
+  const [foods, setFoods] = useState<Food[]>([]);
+  const [materials, setMaterials] = useState<Material[]>([]);
 
   const fetchAffiliations = async () => {
     getAffiliations().then((response) => {
@@ -50,15 +53,22 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
     });
   };
 
+  const fetchMaterials = async () => {
+    getMaterials().then((response) => {
+      setMaterials(response.data);
+    });
+  };
+
   useEffect(() => {
     // console.log("DataProvider useEffect executed");
     fetchAffiliations();
     fetchFoods();
+    fetchMaterials();
   }, []);
 
   return (
     <DataContext.Provider
-      value={{ affiliations, foods, fetchAffiliations, fetchFoods }}
+      value={{ affiliations, foods, materials, fetchAffiliations, fetchFoods, fetchMaterials }}
     >
       {children}
     </DataContext.Provider>

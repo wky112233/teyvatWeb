@@ -22,6 +22,7 @@ export const getAffiliations = () => service.get("affiliations");
 
 export const getFoods = () => service.get("foods");
 
+export const getMaterialsByFoodId = (food_id: number) => service.get(`materialsByFood?food_id=${food_id}`);
 // export const getNation = () => service.get("nation");
 
 export const getLivingBeings = () => service.get("livingBeing");
