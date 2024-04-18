@@ -53,7 +53,7 @@ export default function CharacterContent({
       label2: "Title",
       value2: character.title,
     },
-    // 其他属性...
+    
   ];
   return (
     <React.Fragment>

@@ -37,8 +37,9 @@ interface Food {
 }
 
 interface Material {
-  name: string;
-  position: string;
+  material_name: string;
+  material_description: string;
+  material_icon_img: string;
 }
 
 interface CheckBoxSelectProps {
